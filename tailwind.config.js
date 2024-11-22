@@ -7,9 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'below-tab': { 'max': '880px' }, // custom breakpoint for below 600px
+        'hidde-nav': { 'max': '750px' }, // custom breakpoint for below 600px
+        'below-sm': { 'max': '650px' },
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "primary-blue": "rgb(39, 129, 239)", // corrected RGB syntax
       },
     },
   },

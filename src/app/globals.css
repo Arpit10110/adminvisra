@@ -2,20 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+/* body{
+    font-family: League Spartan, sans-serif;
+    font-weight: 400;
+} */
+
+html{
+    font-size: 100%;
+}
+.css-15k6ek6-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 0rem !important;
+}
+.css-117jitv {
+  padding: 0rem;
+}
+@media only screen and (width<= 880px) {
+    html{
+        font-size: 85%;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@media only screen and (width<= 650px) {
+    html{
+        font-size: 80%;
+    }
 }
