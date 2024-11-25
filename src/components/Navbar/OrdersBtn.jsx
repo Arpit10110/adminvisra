@@ -22,7 +22,7 @@ const OrdersBtn = () => {
         Setshowindividual(false)
         try {
             const {data} = await axios.get("/api/getorgorder");
-            SetIndData(data.data);
+            SetOrgData(data.data);
         } catch (error) {
             console.log(error)
         }
@@ -45,7 +45,7 @@ const OrdersBtn = () => {
                 {
                     IndData.map((i,index)=>{
                         return(
-                            <IndCard key={index}  />
+                            <IndCard key={index} images={i.image} order={i.order} paymentid={i.paymentid} price={i.price} user={i.user} id={i._id}      />
                         )
                     })
                 }
