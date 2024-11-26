@@ -23,6 +23,7 @@ const OrdersBtn = () => {
         try {
             const {data} = await axios.get("/api/getorgorder");
             SetOrgData(data.data);
+            console.log(data.data);
         } catch (error) {
             console.log(error)
         }
@@ -41,7 +42,7 @@ const OrdersBtn = () => {
         </div>
         {
             showindividual ?
-            <div>
+            <div className='w-full pt-[2rem] flex flex-wrap justify-around ' >
                 {
                     IndData.map((i,index)=>{
                         return(
@@ -51,7 +52,15 @@ const OrdersBtn = () => {
                 }
             </div>
             :
-            <div></div>
+            <div className='w-full pt-[2rem] flex flex-wrap justify-around ' >
+                {
+                    OrgData.map((i,index)=>{
+                        return(
+                            <IndCard key={index} images={i.image} order={i.order} paymentid={i.paymentid} price={i.price} user={i.user} id={i._id}      />
+                        )
+                    })
+                }
+            </div>
         }
     </>
   )
