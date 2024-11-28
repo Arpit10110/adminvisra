@@ -42,7 +42,7 @@ const OrdersBtn = () => {
         </div>
         {
             showindividual ?
-            <div className='w-full pt-[2rem] flex flex-wrap justify-around ' >
+            <div className='w-full pt-[2rem] flex flex-wrap justify-around gap-y-[3rem] pb-[5rem] ' >
                 {
                     IndData.map((i,index)=>{
                         return(
