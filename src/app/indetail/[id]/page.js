@@ -51,13 +51,16 @@ const page = ({params}) => {
                 <button className='text-center  bg-green-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  '   >Order Completed</button>
             </div>
         </div>
-        <div className="w-[45%] flex flex-col gap-[4rem] " >
-            <div className='bg-gray-100 text-[1.2rem]  px-[1rem] py-[0.5rem] flex flex-col gap-[0.5rem] rounded-md font-semibold ' >
+        <div className="w-[45%] flex flex-col gap-[3rem] " >
+            <div className='bg-gray-100 text-[1.2rem]  px-[1rem] py-[0.5rem] flex flex-col gap-[1rem] rounded-md font-semibold ' >
                 <h2>Customer Name :- {Data.user.name}</h2>
                 <h2>Customer Phone :- <a href={`tel:+${Data.user.phone}`}>{Data.user.phone}</a></h2>
                 <h2>Customer Email :- <a href={`mailto:+${Data.user.email}`}>{Data.user.email}</a></h2>
                 <h2>Customer Address :- {Data.user.address}</h2>
+                <div  className='w-full flex gap-[1rem] flex-col ' >
                 <a   className='text-center  bg-red-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  '   href={`https://wa.me/+91${Data.user.phone}`}>Chat with Customer</a>
+                <a   className='text-center  bg-green-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  '   href={`tel:+${Data.user.phone}`}>Call Customer</a>
+                </div>
             </div>
             <div className='bg-gray-100 text-[1.2rem]  px-[1rem] py-[0.5rem] flex flex-col gap-[1rem] rounded-md font-semibold ' >
                 <h1>Document Proof:-</h1>
