@@ -6,12 +6,14 @@ export const GET = async(req) =>{
     try {
        await connectdb();
        const inddata = await VisraOrderModel.find({})
-        return(
-            NextResponse.json({
-                success : true,
-                data:inddata,
-            })
-        )
+       return NextResponse.json({
+        success: true,
+        data: inddata,
+    }, {
+        headers: {
+            'Cache-Control': 'no-store, no-cache, must-revalidate',
+        }
+    });
     } catch (error) {
         return(
             NextResponse.json({
