@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const IndCard = ({images ,order, paymentid, price, user, id}) => {
+const OrgCard = ({images ,order, paymentid, price, user, id}) => {
   return (
     <>
       <div className='w-[30%] rounded-[0.5rem] bg-gray-300 p-[0.5rem] flex flex-col gap-[0.5rem] cursor-default ' >
@@ -27,10 +27,10 @@ const IndCard = ({images ,order, paymentid, price, user, id}) => {
               <h3>Customer Email :- {user.email}</h3>
             </div>
           </div>
-        <Link className='bg-red-600 text-center px-[1rem] py-[0.5rem] text-white font-semibold rounded-md hover:scale-[1.01] transition-all '  href={`/indetail/${id}`} >View More</Link>
+        <Link className='bg-red-600 text-center px-[1rem] py-[0.5rem] text-white font-semibold rounded-md hover:scale-[1.01] transition-all '  href={`/orgdetail/${id}`} >View More</Link>
       </div>
     </>
   )
 }
 
-export default IndCard
+export default OrgCard

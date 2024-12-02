@@ -2,10 +2,11 @@ import { connectdb } from "@/DB";
 import { NextResponse } from "next/server";
 import OrgOrderModel from "@/Model/OrganizationModel";
 
-export const GET = async(req) =>{
+export const POST = async(req) =>{
     try {
        await connectdb();
-       const orgdata = await OrgOrderModel.find({})
+       const {id} = await req.json();
+       const orgdata = await OrgOrderModel.findById(id);
         return(
             NextResponse.json({
                 success : true,

@@ -11,6 +11,10 @@ export const POST = async(req)=>{
             NextResponse.json({
                 success:true,
                 data:ordersdeatil
+            },{
+                headers: {
+                    'Cache-Control': 'no-store, no-cache, must-revalidate',
+                }
             })
         )
     } catch (error) {

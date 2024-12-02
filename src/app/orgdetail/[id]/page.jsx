@@ -8,7 +8,7 @@ const page = ({params}) => {
     const [isLoading,SetisLoading] = useState(true);
     const getdetails = async(orderid)=>{
         try {
-            const {data} = await axios.post("/api/getdetails",{
+            const {data} = await axios.post("/api/getorgdetails",{
                 id:orderid
             });
             console.log(data.data);
@@ -30,7 +30,7 @@ const page = ({params}) => {
    <Navbar/>
    {
     isLoading ? <div><h1>Loading....</h1></div> :
-    <div className='w-full flex flex-wrap justify-around pt-[5rem]  ' >
+    <div className='w-full flex flex-wrap justify-around pt-[5rem]  pb-[3rem]  ' >
         <div className='w-[40%] flex flex-col gap-[4rem]   ' >
             <div className='bg-gray-300 p-[1rem] rounded-md flex flex-col gap-[0.5rem] ' >
                     <h1 className='text-center bg-blue-600 p-[0.2rem] text-white rounded-md text-[1.1rem] ' >{Data.order.profile}</h1>
@@ -87,6 +87,12 @@ const page = ({params}) => {
                         }
                     </div>
                 </div>
+            </div>
+            <div className='bg-gray-100 text-[1.2rem]  px-[1rem] py-[0.5rem] flex flex-col gap-[1rem] rounded-md font-semibold '>
+                    <h1>Organization name :- {Data.oragdetail.orgname}</h1>
+                    <h1>Department name :- {Data.oragdetail.departmentname}</h1>
+                    <h1>Gst no. :- {Data.oragdetail.gstno}</h1>
+                    <h1>Organization Type :- {Data.oragdetail.orgtype}</h1>
             </div>
         </div>
     </div>
