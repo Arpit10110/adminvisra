@@ -1,34 +1,39 @@
-import Link from 'next/link'
-import React from 'react'
+import React from 'react';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import Link from "next/link"
+const OrgCard = ({sn,order, user, id}) => {
+  const columns = [
+    { id: 'sn', label: 'SN.', minWidth: 70 },
+    { id: 'dsc', label: 'DSC', minWidth: 150 },
+    { id: 'payment', label: 'Payment', minWidth: 170 },
+    { id: 'customer_name', label: 'Customer Name', minWidth: 200 },
+    { id: 'customer_phone', label: 'Customer Phone', minWidth: 150 },
+    { id: 'view_more', label: 'View More', minWidth: 100 },
+  ];
 
-const OrgCard = ({images ,order, paymentid, price, user, id}) => {
+  const rows = [
+    { sn: sn, dsc: order.profile, payment: 'Done', customer_name: user.name, customer_phone: user.phone },
+  ];
+
   return (
     <>
-      <div className='w-[30%] rounded-[0.5rem] bg-gray-300 p-[0.5rem] flex flex-col gap-[0.5rem] cursor-default ' >
-        <div>
-            <h1 className='text-center bg-blue-600 p-[0.2rem] text-white rounded-md text-[1.1rem] ' >{order.profile}</h1>
-        </div>
-        <div className='flex justify-between px-[1.5rem]  bg-blue-600 p-[0.2rem] text-white rounded-md text-[1.1rem]  ' >
-            <h3>Classify :- {order.classify}</h3>
-            <h3>Year :- {order.year}</h3>
-        </div>
-        <div className='flex justify-between px-[1.5rem]  bg-blue-600 p-[0.2rem] text-white rounded-md text-[1.1rem]  '>
-            <h3>Tocken :- {order.token ? <span>YES</span>:<span>NO</span>}</h3>
-            <h3>Assistance :- {order.assistance ? <span>YES</span>:<span>No</span>}</h3>
-        </div>
-        <div className='bg-gray-500 text-white px-[1rem] py-[0.5rem] flex flex-col gap-[0.5rem] rounded-md font-semibold ' >
-            <div>
-              <h3>Customer Name :- {user.name}</h3>
-            </div>
-            <div>
-              <h3>Customer Phone no. :- {user.phone}</h3>
-            </div>
-            <div>
-              <h3>Customer Email :- {user.email}</h3>
-            </div>
-          </div>
-        <Link className='bg-red-600 text-center px-[1rem] py-[0.5rem] text-white font-semibold rounded-md hover:scale-[1.01] transition-all '  href={`/orgdetail/${id}`} >View More</Link>
-      </div>
+        <TableBody>
+    {rows.map((row) => (
+      <TableRow hover key={row.sn}>
+        {columns.map((column) => (
+          <TableCell key={`${row.sn}-${column.id}`}>
+            {
+              column.id == "view_more" ? 
+              <Link className=' text-blue-500   '  href={`/orgdetail/${id}`} >click here</Link>:
+              row[column.id]
+            }
+          </TableCell>
+        ))}
+      </TableRow>
+    ))}
+  </TableBody>
     </>
   )
 }

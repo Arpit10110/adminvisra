@@ -1,9 +1,11 @@
 'use client'
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import React,{useEffect, useState} from 'react'
 
 const page = ({params}) => {
+    const router = useRouter();
     const [Data,SetData]=useState([]);
     const [isLoading,SetisLoading] = useState(true);
     const getdetails = async(orderid)=>{
@@ -23,6 +25,31 @@ const page = ({params}) => {
     useEffect(() => {
      getdetails(params.id);
     }, [])
+
+
+    const completeorder = async()=>{
+       try {
+        const {data} = await axios.post("/api/indorder/complete",{
+            id:params.id
+        })
+       if(data.succes==true){
+        router.push("/")
+       }
+       } catch (error) {
+        console.log(error);
+       }
+    }
+
+    const cancelorder = async()=>{
+        try {
+            const {data} = await axios.post("/api/indorder/cancel",{
+                id:params.id
+            })
+            console.log(data.data);
+           } catch (error) {
+            console.log(error);
+           }
+    }
     
 
   return (
@@ -30,7 +57,7 @@ const page = ({params}) => {
    <Navbar/>
    {
     isLoading ? <div><h1>Loading....</h1></div> :
-    <div className='w-full flex flex-wrap justify-around pt-[5rem]  ' >
+    <div className='w-full flex flex-wrap justify-around pt-[5rem] pb-[5rem]  ' >
         <div className='w-[40%] flex flex-col gap-[4rem]   ' >
             <div className='bg-gray-300 p-[1rem] rounded-md flex flex-col gap-[0.5rem] ' >
                     <h1 className='text-center bg-blue-600 p-[0.2rem] text-white rounded-md text-[1.1rem] ' >{Data.order.profile}</h1>
@@ -47,8 +74,8 @@ const page = ({params}) => {
             </div>
             <div className='bg-gray-300 p-[1rem] rounded-md flex flex-col gap-[1rem] ' >
                 <h1 className='text-[1.5rem] font-semibold ' >Order Status ?</h1>
-                <button className='text-center  bg-red-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  '   >Cancel Order</button>
-                <button className='text-center  bg-green-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  '   >Order Completed</button>
+                <button className='text-center  bg-red-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  ' onClick={cancelorder}   >Cancel Order</button>
+                <button className='text-center  bg-green-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md' onClick={completeorder}   >Order Completed</button>
             </div>
         </div>
         <div className="w-[45%] flex flex-col gap-[3rem] " >

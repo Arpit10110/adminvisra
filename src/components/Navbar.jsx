@@ -13,6 +13,8 @@ const Navbar = () => {
 
         <div className="navlinks flex gap-9 text-[1.1rem]  below-tab:text-[1rem] below-tab:gap-5 ">
           <Link className="hover:text-red-400" href={"/"}>Orders</Link>
+          <Link className="hover:text-red-400" href={"/cancelorder"}>Complete Orders</Link>
+          <Link className="hover:text-red-400" href={"/cancelorder"}>Cancel Orders</Link>
         </div>
 
       </nav>

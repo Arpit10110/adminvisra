@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
-import Table from '@mui/material/Table';
+import React from 'react';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
+import Link from "next/link"
 const IndCard = ({sn, images ,order ,paymentid, price,user,id}) => {
   const columns = [
     { id: 'sn', label: 'SN.', minWidth: 70 },
@@ -18,11 +14,8 @@ const IndCard = ({sn, images ,order ,paymentid, price,user,id}) => {
   ];
 
   const rows = [
-    { sn: sn, dsc: order.profile, payment: 'Done', customer_name: user.name, customer_phone: '9599056856' },
+    { sn: sn, dsc: order.profile, payment: 'Done', customer_name: user.name, customer_phone: user.phone },
   ];
-
-
-
 
 
   return (
@@ -31,7 +24,11 @@ const IndCard = ({sn, images ,order ,paymentid, price,user,id}) => {
       <TableRow hover key={row.sn}>
         {columns.map((column) => (
           <TableCell key={`${row.sn}-${column.id}`}>
-            {row[column.id]}
+            {
+              column.id == "view_more" ? 
+              <Link className=' text-blue-500   '  href={`/indetail/${id}`} >click here</Link>:
+              row[column.id]
+            }
           </TableCell>
         ))}
       </TableRow>
