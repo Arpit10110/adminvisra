@@ -2,10 +2,15 @@
 import Navbar from '@/components/Navbar';
 import axios from 'axios';
 import React,{useEffect, useState} from 'react'
-
+import Backdrop from '@mui/material/Backdrop';
+import { useRouter } from 'next/navigation';
+import CircularProgress from '@mui/material/CircularProgress';
 const page = ({params}) => {
+    const router = useRouter();
     const [Data,SetData]=useState([]);
     const [isLoading,SetisLoading] = useState(true);
+    const [open, setOpen] = useState(false);
+
     const getdetails = async(orderid)=>{
         try {
             const {data} = await axios.post("/api/getorgdetails",{
@@ -14,19 +19,54 @@ const page = ({params}) => {
             console.log(data.data);
             SetData(data.data);
             SetisLoading(false);
-        } catch (error) {
+        } catch (error) { 
             console.log(error);
         }
     }
-
+ 
 
     useEffect(() => {
      getdetails(params.id);
     }, [])
     
+    const completeorder = async()=>{
+        try {
+         setOpen(true);
+         const {data} = await axios.post("/api/orgorder/complete",{
+             id:params.id
+         })
+        if(data.succes==true){
+         setOpen(false);
+         router.push("/")
+        }
+        } catch (error) {
+         console.log(error);
+        }
+     }
+ 
+     const cancelorder = async()=>{
+         try {
+             setOpen(true);
+             const {data} = await axios.post("/api/orgorder/cancel",{
+                 id:params.id
+             })
+             if(data.succes==true){
+                 setOpen(false); 
+                 router.push("/")
+                }
+            } catch (error) {
+             console.log(error);
+            }
+     }
 
   return (
    <>
+      <Backdrop
+        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
    <Navbar/>
    {
     isLoading ? <div><h1>Loading....</h1></div> :
@@ -47,8 +87,8 @@ const page = ({params}) => {
             </div>
             <div className='bg-gray-300 p-[1rem] rounded-md flex flex-col gap-[1rem] ' >
                 <h1 className='text-[1.5rem] font-semibold ' >Order Status ?</h1>
-                <button className='text-center  bg-red-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  '   >Cancel Order</button>
-                <button className='text-center  bg-green-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  '   >Order Completed</button>
+                <button className='text-center  bg-red-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  ' onClick={cancelorder}  >Cancel Order</button>
+                <button className='text-center  bg-green-600 text-white font-semibold px-[1rem] py-[0.5rem] rounded-md  ' onClick={completeorder}   >Order Completed</button>
             </div>
         </div>
         <div className="w-[45%] flex flex-col gap-[3rem] " >

@@ -1,15 +1,16 @@
 "use client"
 import React,{useEffect, useState} from 'react'
 import axios from 'axios';
-import IndCard from './IndCard';
-import Loading from './Loading';
+import Loading from '@/components/Loading';
 import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-const ShowInd = () => {
+import Navbar from '@/components/Navbar';
+import CompleCard from '@/components/CompleCard';
+const page = () => {
     const [IndData,SetIndData]=useState([])
     const [isLoading,SetisLoading]=useState(true)
     const columns = [
@@ -21,14 +22,13 @@ const ShowInd = () => {
         { id: 'year', label: 'Year', minWidth: 50 },
         { id: 'token', label: 'Token', minWidth: 50 },
         { id: 'ass', label: 'Assis', minWidth: 50 },
-        { id: 'Date', label: 'Date & Time', minWidth: 50 },
         { id: 'payment', label: 'Payment', minWidth: 50 },
-        { id: 'view_more', label: 'View More', minWidth: 50 },
+        { id: 'Status', label: 'View More', minWidth: 50 },
       ];
     
     const findindividual = async()=>{
         try {
-            const {data} = await axios.get("/api/getindorder");
+            const {data} = await axios.get("/api/getcompletedorder");
             SetIndData(data.data);
             console.log(data.data);
             SetisLoading(false)
@@ -45,6 +45,7 @@ const ShowInd = () => {
        
   return (
    <>
+   <Navbar/>
    {
     isLoading ? <Loading/>:
    <div className='w-full pt-[2rem] flex flex-wrap justify-around gap-y-[3rem] pb-[5rem] ' >
@@ -67,7 +68,7 @@ const ShowInd = () => {
                     {
                     IndData.map((i,index)=>{
                         return(
-                            <IndCard key={index} sn={index+1} date={i.date} order={i.order} paymentid={i.paymentid} price={i.price} user={i.user} id={i._id}      />
+                            <CompleCard key={index} sn={index+1} date={i.date} order={i.order} paymentid={i.paymentid} price={i.price} user={i.user} id={i._id} status="Success" color="green"      />
                         )
                     })
                 }
@@ -80,4 +81,4 @@ const ShowInd = () => {
   )
 }
 
-export default ShowInd
+export default page

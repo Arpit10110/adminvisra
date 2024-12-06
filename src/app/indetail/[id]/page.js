@@ -3,11 +3,15 @@ import Navbar from '@/components/Navbar';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React,{useEffect, useState} from 'react'
-
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 const page = ({params}) => {
     const router = useRouter();
     const [Data,SetData]=useState([]);
     const [isLoading,SetisLoading] = useState(true);
+    const [open, setOpen] = useState(false);
+
+
     const getdetails = async(orderid)=>{
         try {
             const {data} = await axios.post("/api/getdetails",{
@@ -29,10 +33,12 @@ const page = ({params}) => {
 
     const completeorder = async()=>{
        try {
+        setOpen(true);
         const {data} = await axios.post("/api/indorder/complete",{
             id:params.id
         })
        if(data.succes==true){
+        setOpen(false);
         router.push("/")
        }
        } catch (error) {
@@ -42,10 +48,14 @@ const page = ({params}) => {
 
     const cancelorder = async()=>{
         try {
+            setOpen(true);
             const {data} = await axios.post("/api/indorder/cancel",{
                 id:params.id
             })
-            console.log(data.data);
+            if(data.succes==true){
+                setOpen(false); 
+                router.push("/")
+               }
            } catch (error) {
             console.log(error);
            }
@@ -54,6 +64,12 @@ const page = ({params}) => {
 
   return (
    <>
+   <Backdrop
+        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+        open={open}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
    <Navbar/>
    {
     isLoading ? <div><h1>Loading....</h1></div> :

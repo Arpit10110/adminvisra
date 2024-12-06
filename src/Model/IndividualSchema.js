@@ -34,9 +34,10 @@ const Schema = new mongoose.Schema({
     user: { type: UserSchema, required: true },
     price: { type: PriceSchema, required: true },
     paymentid:{ type: String, required: true},
-    image: { type: ImageSchema, required: true}
+    image: { type: ImageSchema, required: true},
+    date:{type:String, required: true},
 });
 
-const VisraOrderModel = mongoose.models.IndOrderModelA || mongoose.model('IndOrderModelA', Schema);
+const VisraOrderModel = mongoose.models.IndOrderModelB || mongoose.model('IndOrderModelB', Schema);
 export default VisraOrderModel;
 

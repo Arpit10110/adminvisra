@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server";
-import VisraOrderModel from "@/Model/IndividualSchema";
-import CompletedOrders from "@/Model/CompletedOrders";
+import OrgOrderModel from "@/Model/OrganizationModel";
+import CancelOrders from "@/Model/CancelOrders";
 
 export const POST = async(req)=>{
     try {
 
         const {id} =await req.json();
 
-        const data = await VisraOrderModel.findById(id)
+        const data = await OrgOrderModel.findById(id)
         const userinfo = {
-            name:data.user.name, 
+            name:data.user.name,
             phone:data.user.phone,
             email:data.user.email,
             address:data.user.address
@@ -33,9 +33,8 @@ export const POST = async(req)=>{
             pan:data.image.pan,
             other:data.image.other
         }
-        console.log(imginfo);
 
-        await CompletedOrders.create({
+        await CancelOrders.create({
             order:orderinfo,
             user:userinfo,
             price:priceinfo,
@@ -43,11 +42,11 @@ export const POST = async(req)=>{
             image:imginfo
         })
 
-        await VisraOrderModel.deleteOne({ _id: id });
+        await OrgOrderModel.deleteOne({ _id: id });
 
         return (
             NextResponse.json({
-                data:"Order completed successfully",
+                data:"Order Canceled successfully",
                 succes: true,
             })
         )

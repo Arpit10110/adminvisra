@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import VisraOrderModel from "@/Model/IndividualSchema";
+import OrgOrderModel from "@/Model/OrganizationModel";
 import CompletedOrders from "@/Model/CompletedOrders";
 
 export const POST = async(req)=>{
@@ -7,7 +7,7 @@ export const POST = async(req)=>{
 
         const {id} =await req.json();
 
-        const data = await VisraOrderModel.findById(id)
+        const data = await OrgOrderModel.findById(id)
         const userinfo = {
             name:data.user.name, 
             phone:data.user.phone,
@@ -33,8 +33,6 @@ export const POST = async(req)=>{
             pan:data.image.pan,
             other:data.image.other
         }
-        console.log(imginfo);
-
         await CompletedOrders.create({
             order:orderinfo,
             user:userinfo,
@@ -43,7 +41,7 @@ export const POST = async(req)=>{
             image:imginfo
         })
 
-        await VisraOrderModel.deleteOne({ _id: id });
+        await OrgOrderModel.deleteOne({ _id: id });
 
         return (
             NextResponse.json({

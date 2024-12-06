@@ -23,13 +23,6 @@ const PriceSchema = new mongoose.Schema({
     totalprice: { type: Number, required: true },
 });
 
-const Oraganization = new mongoose.Schema({
-    departmentname: { type: String, required: true },
-    orgname: { type: String, required: true },
-    orgtype: { type: String, required: true },
-    gstno: { type: String, required: true },
-});
-
 const ImageSchema = new mongoose.Schema({
     adhar: { type: String, required: true },
     pan: { type: String, required: true },
@@ -40,11 +33,10 @@ const Schema = new mongoose.Schema({
     order: { type: OrderSchema, required: true },
     user: { type: UserSchema, required: true },
     price: { type: PriceSchema, required: true },
-    oragdetail: { type: Oraganization, required: true },
     paymentid:{ type: String, required: true},
-    image: { type: ImageSchema, required: true},
-    date:{type:String, required: true},
-})
+    image: { type: ImageSchema, required: true}
+});
 
-const OrgOrderModel = mongoose.models.OrgModelB || mongoose.model('OrgModelB', Schema);
-export default OrgOrderModel;
+const CancelOrders = mongoose.models.CancelOrders || mongoose.model('CancelOrders', Schema);
+export default CancelOrders;
+

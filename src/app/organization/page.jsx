@@ -15,12 +15,17 @@ const page = () => {
   const [OrgData, SetOrgData] = useState([]);
   const [isLoading, SetisLoading] = useState(true);
   const columns = [
-    { id: "sn", label: "SN.", minWidth: 70 },
-    { id: "dsc", label: "DSC", minWidth: 150 },
-    { id: "payment", label: "Payment", minWidth: 170 },
-    { id: "customer_name", label: "Customer Name", minWidth: 200 },
-    { id: "customer_phone", label: "Customer Phone", minWidth: 150 },
-    { id: "view_more", label: "View More", minWidth: 100 },
+    { id: 'sn', label: 'SN.', minWidth: 50 },
+    { id: 'customer_name', label: 'Customer Name', minWidth: 50 },
+    { id: 'customer_phone', label: 'Customer Phone', minWidth: 50 },
+    { id: 'dsc', label: 'DSC', minWidth: 50 },
+    { id: 'classify', label: 'Classify', minWidth: 50 },
+    { id: 'year', label: 'Year', minWidth: 50 },
+    { id: 'token', label: 'Token', minWidth: 50 },
+    { id: 'ass', label: 'Assis', minWidth: 50 },
+    { id: 'date', label: 'Date & Time', minWidth: 50 },
+    { id: 'payment', label: 'Payment', minWidth: 50 },
+    { id: 'view_more', label: 'View More', minWidth: 50 },
   ];
 
   const findorganization = async () => {
@@ -65,7 +70,7 @@ const page = () => {
                 </TableHead>
                 {OrgData.map((i, index) => {
                   return (
-                    <OrgCard key={index} sn={index+1} images={i.image} order={i.order} paymentid={i.paymentid} price={i.price} user={i.user} id={i._id}
+                    <OrgCard key={index} sn={index+1} date={i.date} order={i.order} paymentid={i.paymentid} price={i.price} user={i.user} id={i._id}
                     />
                   );
                 })}
