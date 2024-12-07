@@ -10,7 +10,9 @@ export const GET = async(req) =>{
         data: inddata,
     }, {
         headers: {
-            'Cache-Control': 'no-store, no-cache, must-revalidate',
+            'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+            'Pragma': 'no-cache',
+            'Expires': '0',
         }
     });
     } catch (error) {
